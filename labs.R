@@ -17,7 +17,7 @@ for (i in 1:500) {
   # Make Day variable
   dat$Days = rep(1:8, times = N)
   # Simulate random error
-  dat$err = rnorm(8*N,mean=0,sd=10)
+  dat$err = rnorm(8*N,mean=0,sd=10) ###gdr: I think the sd=30 instead of 10
   
   # Simulate (correlated) subject-level random effects for intercepts and slopes
   ## Covariance matrix
@@ -30,7 +30,7 @@ for (i in 1:500) {
   dat = merge(dat,U1,by='id')
   
   # Simulate the outcome: Reaction_ij
-  dat$Reaction = (251.405 + dat$V1) + (5 + dat$V2)*dat$Days + dat$err
+  dat$Reaction = (251.405 + dat$V1) + (5 + dat$V2)*dat$Days + dat$err ###gdr: I think you should change here the effect side to  β1=3 instead of 5
   
   # Step 2: test the null hypothesis
   mod = lmer(Reaction ~ Days + (Days | id), dat)
